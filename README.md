@@ -35,7 +35,7 @@ A simple `say_hello_job` graph with a `hello` function outlines the most basic *
 - you will observe how the text: `Hello, Dagster!` is returned as a result (but noting is printed just yet).
 - check out the various UI components: https://docs.dagster.io/concepts/dagit/dagit
 
-[graph of say_hello_job](img/say_hello_job.png)
+![graph of say_hello_job](img/say_hello_job.png)
 
 #### hello-world (1)
 
