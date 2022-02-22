@@ -35,6 +35,8 @@ A simple `say_hello_job` graph with a `hello` function outlines the most basic *
 - you will observe how the text: `Hello, Dagster!` is returned as a result (but noting is printed just yet).
 - check out the various UI components: https://docs.dagster.io/concepts/dagit/dagit
 
+[graph of say_hello_job](img/say_hello_job.png)
+
 #### hello-world (1)
 
 - now we log the result when running the `say_hello_job_logging`. 
@@ -69,6 +71,10 @@ There is now a butting `Scaffold missing configuration`. Delete the configuratio
 
 #### software-defined assets
 
+Conceptually, software-defined assets invert the typical relationship between assets and computation. Instead of defining a graph of ops and recording which assets those ops end up materializing, you define a set of assets, each of which knows how to compute its contents from upstream assets.
+
+This means you start to turn the data pipeline inside out and reason about the things people actually care about: The materialized state and how to manage it, its evolution over time and quality and lineage.
+
 Further reading material:
 
 - https://dagster.io/blog/rebundling-the-data-platform
@@ -76,6 +82,8 @@ Further reading material:
 - TODO link future Dagster blog post here (they promised a good one for Thursday)
 
 ##### minimal example (A)
+
+We start with a small dummy example
 
 - open the graph: `minimal_assets`
 - observe the assets UI (including the job graph)
