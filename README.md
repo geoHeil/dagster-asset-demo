@@ -17,11 +17,80 @@ pip install --editable .
 
 make dagit
 # explore: Go to http://localhost:3000
+
+# optionally enable:
+dagster-daemon run
+# to use schedules and backfills
 ```
 
 ### walk-through of demo contents
 
+#### hello-world (0)
 
+A simple `say_hello_job` graph with a `hello` function outlines the most basic **hello-world** example.
+
+- go to the launchpad
+- run the `say_hello_job`
+- take a look of the logs. In particular the nice visualization & structured logging capabilities.
+- you will observe how the text: `Hello, Dagster!` is returned as a result (but noting is printed just yet).
+- check out the various UI components: https://docs.dagster.io/concepts/dagit/dagit
+
+#### hello-world (1)
+
+- now we log the result when running the `say_hello_job_logging`. 
+- as you can observe:
+    - there is an additional stage. The results of the first step are passed over into the next step (operation)
+    - in the logs you can nicely find the logging message
+
+#### hello-world (2) using the structured configuration
+
+- now we log the result when running the `say_hello_job_configuration` the structured configuration accepts a name of a person who will be greeted.
+- observe how the configuration can be scaffolded and includes meta information as well as type safety 
+
+> NOTICE: A simple run will fail (try it), as the configuration is not supplied.
+
+Then, for a second try supply the required configuration:
+
+```
+ops:
+  hello_config:
+    config:
+      name: "Georg"
+```
+in the Dagit UI.
+
+> NOTICE: There are multiple possibilities to supply the configuration (CLI, JSON, YAML fragments in the Dagit UI, default configuration in python). To learn about the details read more at: https://docs.dagster.io/concepts/configuration/config-schema and https://docs.dagster.io/tutorial/advanced-tutorial/configuring-ops
+
+> NOTICE: We are using a typesafe configuration here. This means the configuration is not random YAML - but rather conforms to a specific well-defined schema.
+> Furthermore, notice how Dagit can now auto-suggest a suitable (but empty) configuration.
+
+There is now a butting `Scaffold missing configuration`. Delete the configuration - and have Dagit scaffold it for you.
+
+
+#### software-defined assets
+
+Further reading material:
+
+- https://dagster.io/blog/rebundling-the-data-platform
+- https://docs.dagster.io/guides/dagster/software-defined-assets (as of 0.14.1 the API is stable now)
+- TODO link future Dagster blog post here (they promised a good one for Thursday)
+
+##### minimal example (A)
+
+- open the graph: `minimal_assets`
+- observe the assets UI (including the job graph)
+
+##### minimal example with lineage (B)
+
+temperature 3 steps
+
+##### example with resources (C)
+
+Hackernews & testing
+
+#### next steps
+
+IO manager, external lineage, scheduling, backfills, testing
 
 ### Contents
 
