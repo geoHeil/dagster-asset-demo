@@ -95,6 +95,21 @@ We start with a small dummy example
 - observe the assets UI (including the job graph)
 - see how staleness propagates
 
+Asset lineage from the source:
+
+![graph of mini_asset0](img/mini_asset0.png)  
+
+And details about the asset:
+
+![graph of mini_asset1](img/mini_asset1.png)    
+
+
+Here a more complex example including the lineage of two assets where one is marked as stale when the upstream one is updated:
+
+![graph of mini_asset2](img/mini_asset2.png)    
+
+
+
 ##### minimal example with lineage (B)
 
 - temperature example

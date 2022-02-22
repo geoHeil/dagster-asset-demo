@@ -4,6 +4,9 @@ from dagster import repository
 from ASSET_DEMO.jobs.say_hello import say_hello_job
 from ASSET_DEMO.jobs.say_hello_logging import say_hello_job_logging
 from ASSET_DEMO.jobs.say_hello_configuration import say_hello_job_configuration
+
+from ASSET_DEMO.jobs.sde_minimal_asset import mini_temperatures_pipeline
+
 from ASSET_DEMO.schedules.my_hourly_schedule import my_hourly_schedule
 from ASSET_DEMO.sensors.my_sensor import my_sensor
 
@@ -16,7 +19,7 @@ def ASSET_DEMO():
     For hints on building your Dagster repository, see our documentation overview on Repositories:
     https://docs.dagster.io/overview/repositories-workspaces/repositories
     """
-    jobs = [say_hello_job, say_hello_job_logging, say_hello_job_configuration]
+    jobs = [say_hello_job, say_hello_job_logging, say_hello_job_configuration, mini_temperatures_pipeline]
     schedules = [my_hourly_schedule]
     sensors = [my_sensor]
 
