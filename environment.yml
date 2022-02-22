@@ -1,0 +1,37 @@
+# apply via
+# conda env create -f environment.yml
+# conda activate dagster-asset-demo
+# conda remove --name dagster-asset-demo --all
+#name: dagster-asset-demo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jupyterlab
+  - jupyter_contrib_nbextensions
+  - nb_conda
+  - ipywidgets
+  - jupyterlab-git
+  - yarn
+  - nodejs
+  - python>=3.8
+  - git
+  - mamba
+  - pandas
+  - pyarrow
+  - pygit2
+
+  #- psycopg2
+  - requests
+  - ratelimit 
+  - pip
+  - pip:
+      - dagster
+      - dagster-shell
+      - dagster-pandas
+      #- dagster-postgres
+      - dagit
+      # - acryl-datahub
+      # - dagster-dbt
+      # - dbt
+      # - polars
