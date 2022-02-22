@@ -37,12 +37,18 @@ A simple `say_hello_job` graph with a `hello` function outlines the most basic *
 
 ![graph of say_hello_job](img/say_hello_job.png)
 
+- furthermore, take not of the:
+    - statistics like runtime stats
+    - as well as the documentation (parsing of the docstring) describing the function
+
 #### hello-world (1)
 
 - now we log the result when running the `say_hello_job_logging`. 
 - as you can observe:
     - there is an additional stage. The results of the first step are passed over into the next step (operation)
     - in the logs you can nicely find the logging message
+
+![graph of say_hello_job_logging](img/say_hello_job_logging.png)    
 
 #### hello-world (2) using the structured configuration
 
@@ -66,12 +72,12 @@ in the Dagit UI.
 > NOTICE: We are using a typesafe configuration here. This means the configuration is not random YAML - but rather conforms to a specific well-defined schema.
 > Furthermore, notice how Dagit can now auto-suggest a suitable (but empty) configuration.
 
-There is now a butting `Scaffold missing configuration`. Delete the configuration - and have Dagit scaffold it for you.
+There is now a button `Scaffold missing configuration`. Delete the configuration - and have Dagit scaffold it for you.
 
 
 #### software-defined assets
 
-Conceptually, software-defined assets invert the typical relationship between assets and computation. Instead of defining a graph of ops and recording which assets those ops end up materializing, you define a set of assets, each of which knows how to compute its contents from upstream assets.
+Conceptually, software-defined assets invert the typical relationship between assets and computation. Instead of defining a graph of ops and recording which assets those ops end up materializing, you define a set of assets, each of which knows how to compute its contents from upstream assets. :smile: derived from https://docs.dagster.io/guides/dagster/software-defined-assets .
 
 This means you start to turn the data pipeline inside out and reason about the things people actually care about: The materialized state and how to manage it, its evolution over time and quality and lineage.
 
@@ -87,18 +93,38 @@ We start with a small dummy example
 
 - open the graph: `minimal_assets`
 - observe the assets UI (including the job graph)
+- see how staleness propagates
 
 ##### minimal example with lineage (B)
 
-temperature 3 steps
+- temperature example
+- combine multiple assets to derive a new asset
+- have some *complex* assets in separate graph but still see the big picture
 
-##### example with resources (C)
+##### example with partitions (C)
 
-Hackernews & testing
+##### example with resources (D)
 
-#### next steps
+- a more complex-real-world web-scraping example where comments from a forum (hackernews) are downloaded
+- using DBT SQL transformations can be handled
 
-IO manager, external lineage, scheduling, backfills, testing
+
+
+
+
+#### further next steps
+
+There are many more topics to cover beyond the scope of this simple introductory tutorial.
+In particular:
+
+- IO manager
+- external lineage in an enterprise data catalog like https://datahubproject.io/ or
+- scheduling
+- partitions & backfills
+- easy testing of workflows by separating the business logic (semantics) from the underlying platform and resources
+
+The official dagster documentation contains some good examples. 
+In particular https://docs.dagster.io/guides/dagster/example_project is a great recommentation to learn more.
 
 ### Contents
 
