@@ -25,3 +25,8 @@ def daily_temperature_highs(sfo_q2_weather_sample: DataFrame) -> DataFrame:
 def hottest_dates(daily_temperature_highs: DataFrame) -> DataFrame:
     """Computes the 10 hottest dates"""
     return daily_temperature_highs.nlargest(10, "max_tmpf")
+
+@asset
+def lowest_dates(daily_temperature_highs: DataFrame) -> DataFrame:
+    """Computes the 3 lowest dates"""
+    return daily_temperature_highs.nsmallest(3, "max_tmpf")

@@ -116,16 +116,22 @@ Here a more complex example including the lineage of two assets where one is mar
 - combine multiple assets to derive a new asset
 - have some *complex* assets in separate graph but still see the big picture
 
+The implicitly shown lineage:
+
+![graph of assets0](img/assets0.png)  
+
+... can be expanded to a true full view:
+
+![graph of assets1](img/assets1.png)    
+
 ##### example with partitions (C)
+
+
 
 ##### example with resources (D)
 
 - a more complex-real-world web-scraping example where comments from a forum (hackernews) are downloaded
 - using DBT SQL transformations can be handled
-
-
-
-
 
 #### further next steps
 
