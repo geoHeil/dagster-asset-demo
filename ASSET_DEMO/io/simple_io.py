@@ -38,3 +38,27 @@ class LocalFileSystemParquetIOManager(IOManager):
         """This reads a dataframe from a CSV."""
         fpath = self._get_fs_path(context.asset_key)
         return pd.read_parquet(fpath)
+
+
+from dagster import AssetKey, IOManager, MetadataEntry
+
+# https://docs.dagster.io/concepts/assets/asset-materializations
+class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
+    def load_input(self, context):
+        file_path = os.path.join("my_base_dir", context.step_key, context.name)
+        return pd.read_csv(file_path)
+
+    def handle_output(self, context, obj):
+        file_path = os.path.join("my_base_dir", context.step_key, context.name)
+
+        obj.to_csv(file_path, index=False)
+
+        yield MetadataEntry.int(obj.shape[0], label="number of rows")
+        yield MetadataEntry.float(0.1234, "some_column mean")
+
+    def get_output_asset_key(self, context):
+        file_path = os.path.join("my_base_dir", context.step_key, context.name)
+        return AssetKey(file_path)
+
+    def get_output_asset_partitions(self, context):
+        return set(context.config["partitions"])

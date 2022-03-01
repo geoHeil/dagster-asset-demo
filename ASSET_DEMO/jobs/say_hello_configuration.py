@@ -1,6 +1,6 @@
 from dagster import job
 
-from ASSET_DEMO.ops.hello import hello, log_hello, hello_config
+from ASSET_DEMO.ops.hello import hello, hello_config
 
 @job
 def say_hello_job_configuration():

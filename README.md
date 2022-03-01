@@ -126,7 +126,23 @@ The implicitly shown lineage:
 
 ##### example with partitions (C)
 
+> HINT: do not forget to start the dagster-daemon `dagster-daemon run`
 
+![backfilling of partitions](img/partitioned_dummy_asset.png)
+
+> NOTICE: for a production grade setup a more performant run coordinator needs to be configured https://docs.dagster.io/deployment/run-coordinator
+
+![backfilling of partition metrics](img/partitioned_dummy_asset_metrics.png)
+
+Various metrics are collected for each partition.
+
+Notice the duality between operations and assets:
+
+![a1](img/a1.png)
+
+![a2](img/a2.png)
+
+(you can simply toggle the switch)
 
 ##### example with resources (D)
 
