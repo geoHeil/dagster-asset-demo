@@ -103,7 +103,6 @@ And details about the asset:
 
 ![graph of mini_asset1](img/mini_asset1.png)    
 
-
 Here a more complex example including the lineage of two assets where one is marked as stale when the upstream one is updated:
 
 ![graph of mini_asset2](img/mini_asset2.png)    
@@ -124,7 +123,8 @@ The implicitly shown lineage:
 
 ![graph of assets1](img/assets1.png)    
 
-##### example with partitions (C)
+#### partitions
+##### job of operations example with partitions (C)
 
 > HINT: do not forget to start the dagster-daemon `dagster-daemon run`
 
@@ -136,18 +136,15 @@ The implicitly shown lineage:
 
 Various metrics are collected for each partition.
 
-Notice the duality between operations and assets:
+##### partitioned assets
 
-![a1](img/a1.png)
-
-![a2](img/a2.png)
-
-(you can simply toggle the switch)
+TODO
 
 ##### example with resources (D)
 
 - a more complex-real-world web-scraping example where comments from a forum (hackernews) are downloaded
 - using DBT SQL transformations can be handled
+- TODO steal the hacker news example
 
 #### further next steps
 

@@ -58,7 +58,8 @@ class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
 
     def get_output_asset_key(self, context):
         file_path = os.path.join("my_base_dir", context.step_key, context.name)
-        return AssetKey(file_path)
+        #return AssetKey(file_path)
+        return file_path
 
     def get_output_asset_partitions(self, context):
         return set(context.config["partitions"])

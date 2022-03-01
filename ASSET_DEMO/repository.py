@@ -2,7 +2,8 @@ from ASSET_DEMO.jobs.say_hello_logging import say_hello_job_logging
 from dagster import repository
 
 from ASSET_DEMO.jobs.say_hello import say_hello_job
-from ASSET_DEMO.jobs.partitioned_asset import partitioned_dummy_asset
+from ASSET_DEMO.jobs.partitioned_asset import partitioned_asset_dummy_pipeline
+from ASSET_DEMO.jobs.partitioned_dummy_job import partitioned_dummy_job
 from ASSET_DEMO.jobs.say_hello_logging import say_hello_job_logging
 from ASSET_DEMO.jobs.say_hello_configuration import say_hello_job_configuration
 
@@ -24,7 +25,8 @@ def ASSET_DEMO():
     jobs = [say_hello_job, say_hello_job_logging, say_hello_job_configuration, 
     mini_temperatures_pipeline,
     job_part_1, job_part_2,
-    partitioned_dummy_asset
+    partitioned_asset_dummy_pipeline,
+    partitioned_dummy_job
     
     ]
     schedules = [my_hourly_schedule]
