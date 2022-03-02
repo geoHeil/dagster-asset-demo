@@ -194,3 +194,4 @@ cython_debug/
 
 daily_temperature_highs.parquet
 hottest_dates.parquet
+warehouse_location

@@ -20,15 +20,21 @@ dependencies:
   - pandas
   - pyarrow
   - pygit2
-
-  #- psycopg2
+  - sqlalchemy
+  - sqlite
+  - mock
   - requests
   - ratelimit 
+  - pandera
   - pip
   - pip:
       - dagster
       - dagster-shell
       - dagster-pandas
+      - dagster-pandera
+      - dagster-dbt
+      - dbt-core
+      - dbt-sqlite
       #- dagster-postgres
       - dagit
       # - acryl-datahub

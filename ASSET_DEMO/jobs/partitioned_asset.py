@@ -18,10 +18,10 @@ from dagster import AssetGroup
 from dagster import daily_partitioned_config, DailyPartitionsDefinition
 from datetime import datetime
 
-@asset(partitions_def=DailyPartitionsDefinition(start_date="2020-02-01"))
+@asset(partitions_def=DailyPartitionsDefinition(start_date="2022-02-01"))
 def dummy_asset_partitioned(context) -> DataFrame:
     """Creates a mini dummy asset which is partitioned"""
-    partition_key = context.output_asset_partition_key
+    partition_key = context.output_asset_partition_key()
     # TODO 1: how to get the true partition key value and not its object?
     get_dagster_logger().info(f"Partitioned asset from: {partition_key}")
     df = pd.DataFrame({'foo':[1,3,3], 'bar':['a', 'b', 'c']})

@@ -12,6 +12,7 @@ from ASSET_DEMO.jobs.sde_asset_combined import job_part_1, job_part_2
 
 from ASSET_DEMO.schedules.my_hourly_schedule import my_hourly_schedule
 from ASSET_DEMO.sensors.my_sensor import my_sensor
+from ASSET_DEMO.jobs.data_validation import stocks_job
 
 
 @repository
@@ -26,7 +27,8 @@ def ASSET_DEMO():
     mini_temperatures_pipeline,
     job_part_1, job_part_2,
     partitioned_asset_dummy_pipeline,
-    partitioned_dummy_job
+    partitioned_dummy_job,
+    stocks_job
     
     ]
     schedules = [my_hourly_schedule]

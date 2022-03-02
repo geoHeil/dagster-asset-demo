@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from dagster import get_dagster_logger, AssetKey, IOManager
 from pandas import DataFrame
+from pathlib import Path
 
 class LocalFileSystemCSVIOManager(IOManager):
     """Translates between Pandas DataFrames and CSVs on the local filesystem."""
@@ -44,22 +45,27 @@ from dagster import AssetKey, IOManager, MetadataEntry
 
 # https://docs.dagster.io/concepts/assets/asset-materializations
 class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
+
+    def __init__(self):
+        super().__init__()
+        self.base_path = "warehouse_location"
+
     def load_input(self, context):
-        file_path = os.path.join("my_base_dir", context.step_key, context.name)
+        file_path = os.path.join(self.base_path, context.step_key, context.name)
         return pd.read_csv(file_path)
 
     def handle_output(self, context, obj):
-        file_path = os.path.join("my_base_dir", context.step_key, context.name)
-
+        file_path = os.path.join(self.base_path, context.step_key, context.name)
+        Path(os.path.join(self.base_path, context.step_key)).mkdir(parents=True, exist_ok=True)
         obj.to_csv(file_path, index=False)
 
         yield MetadataEntry.int(obj.shape[0], label="number of rows")
         yield MetadataEntry.float(0.1234, "some_column mean")
 
-    def get_output_asset_key(self, context):
-        file_path = os.path.join("my_base_dir", context.step_key, context.name)
-        #return AssetKey(file_path)
-        return file_path
+    #def get_output_asset_key(self, context):
+    #    file_path = os.path.join("my_base_dir", context.step_key, context.name)
+    #    #return AssetKey(file_path)
+    #    return file_path
 
     def get_output_asset_partitions(self, context):
         return set(context.config["partitions"])

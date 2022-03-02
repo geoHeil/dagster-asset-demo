@@ -25,6 +25,16 @@ dagster-daemon run
 
 ### walk-through of demo contents
 
+The modern data platform requires an E2E orchestration system like dagster which prevents tools silos.
+
+The following content was inspired by: 
+
+- https://dagster.io/blog/rebundling-the-data-platform
+- https://dagster.io/blog/dagster-0-14-0-never-felt-like-this-before
+- https://dagster.io/blog/software-defined-assets
+- https://www.sspaeti.com/blog/analytics-api-with-graphql-the-next-level-of-data-engineering/
+- and the official dagster documentation https://docs.dagster.io/concepts
+
 #### hello-world (0)
 
 A simple `say_hello_job` graph with a `hello` function outlines the most basic **hello-world** example.
@@ -74,6 +84,19 @@ in the Dagit UI.
 
 There is now a button `Scaffold missing configuration`. Delete the configuration - and have Dagit scaffold it for you.
 
+#### schema validation & governance
+
+As demonstrated in the `stocks_job` [Pandera](https://pandera.readthedocs.io/en/stable/) nicely validates the data and throws an error as the (deliberately created NULL values for demonstration purposes) are not allowed with this schema definition.
+
+>Based on: https://docs.dagster.io/integrations/pandera#using-dagster-with-pandera
+
+pandera schema can be converted to dagster types automatically
+
+![pandera](img/pandera_schema.png)
+
+and validated:
+
+![pandera validation failure](img/pandera_failure.png)
 
 #### software-defined assets
 
@@ -107,8 +130,6 @@ Here a more complex example including the lineage of two assets where one is mar
 
 ![graph of mini_asset2](img/mini_asset2.png)    
 
-
-
 ##### minimal example with lineage (B)
 
 - temperature example
@@ -138,13 +159,25 @@ Various metrics are collected for each partition.
 
 ##### partitioned assets
 
-TODO
+notice how the asset can track metadata for an materialization
+![notice how the asset can track metadata for an materialization](img/da_structured_logging.png)
+
+and create a dashboard directly from the metadata for quick observability
+
+![dashbaord from the collected metadata of the various runs](img/da_stats.png)
+
+TODO: fix IO manager
 
 ##### example with resources (D)
 
 - a more complex-real-world web-scraping example where comments from a forum (hackernews) are downloaded
 - using DBT SQL transformations can be handled
 - TODO steal the hacker news example
+
+
+#### Airbyte example
+
+TODO
 
 #### further next steps
 
