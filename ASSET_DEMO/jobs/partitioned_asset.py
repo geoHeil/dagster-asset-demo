@@ -15,7 +15,7 @@ from ASSET_DEMO.io.simple_io import LocalFileSystemCSVIOManager, LocalFileSystem
 from dagster import IOManagerDefinition
 from dagster import AssetGroup
 
-from dagster import daily_partitioned_config, DailyPartitionsDefinition
+from dagster import daily_partitioned_config, DailyPartitionsDefinition, ResourceDefinition
 from datetime import datetime
 
 @asset(partitions_def=DailyPartitionsDefinition(start_date="2022-02-01"))
@@ -40,5 +40,6 @@ partitioned_asset_dummy_pipeline = build_assets_job(
     source_assets=[],
     resource_defs={
         "io_manager": IOManagerDefinition.hardcoded_io_manager(PandasCsvIOManagerWithOutputAssetPartitions()),
+        "partition_bounds": ResourceDefinition.none_resource()
     },
 )

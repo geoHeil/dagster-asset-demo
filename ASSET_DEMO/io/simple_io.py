@@ -55,6 +55,13 @@ class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
         return pd.read_csv(file_path)
 
     def handle_output(self, context, obj):
+        #partition = context.output_asset_partition_key()
+        partition_bounds = context.resources.partition_bounds
+        partition_str = partition_bounds["start"] + "_" + partition_bounds["end"]
+        partition_str = "".join(c for c in partition_str if c == "_" or c.isdigit())
+        #partition = context.config["partitions"]
+        #get_dagster_logger().info(f"Partition in IO-M is: {partition}")
+        get_dagster_logger().info(f"Partition in IO-M is: {partition_bounds} resulting in: {partition_str}")
         file_path = os.path.join(self.base_path, context.step_key, context.name)
         Path(os.path.join(self.base_path, context.step_key)).mkdir(parents=True, exist_ok=True)
         obj.to_csv(file_path, index=False)
