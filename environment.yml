@@ -18,6 +18,8 @@ dependencies:
   - git
   - mamba
   - pandas
+  - numpy
+  - scipy
   - pyarrow
   - pygit2
   - sqlalchemy
@@ -32,12 +34,12 @@ dependencies:
       - dagster-shell
       - dagster-pandas
       - dagster-pandera
+      - dagster-postgres
+      - dagster-airbyte
       - dagster-dbt
       - dbt-core
       - dbt-sqlite
-      #- dagster-postgres
+      - dbt-postgres
       - dagit
       # - acryl-datahub
-      # - dagster-dbt
-      # - dbt
       # - polars

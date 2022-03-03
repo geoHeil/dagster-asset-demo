@@ -177,7 +177,24 @@ TODO: fix IO manager
 
 #### Airbyte example
 
-TODO
+> This example requires a running postgres and airbyte instance! Get one via docker: 
+> ```
+> cd modern_data_stack_assets
+> docker-compose up
+> ```
+
+- Postgres is avaiable on: localhost:5432
+- Airbyte is available on: [http://localhost:8000](http://localhost:8000)
+
+> TODO set up Airbyte Connection!!! perhaps following https://dagster.io/blog/software-defined-assets?
+
+detailed instructions: https://dagster.io/blog/software-defined-assets
+
+> NOTICE: We are using a different workspace here https://docs.dagster.io/concepts/repositories-workspaces/workspaces to showcase how different teams perhaps would want to collaborate (and separate their own data assets).
+
+graph integrating [airbyte](https://airbyte.com/), [dbt](https://docs.getdbt.com/tutorial/setting-up) and python code
+
+![graph integrating airbyte, dbt and python code](img/mds_graph.png)
 
 #### further next steps
 
@@ -189,9 +206,13 @@ In particular:
 - scheduling
 - partitions & backfills
 - easy testing of workflows by separating the business logic (semantics) from the underlying platform and resources
+- pyspark
+  - https://github.com/dagster-io/dagster/discussions/6899
 
 The official dagster documentation contains some good examples. 
 In particular https://docs.dagster.io/guides/dagster/example_project is a great recommentation to learn more.
+
+
 
 ### Contents
 

@@ -2,3 +2,4 @@
 # See our documentation overview on Workspaces: https://docs.dagster.io/overview/repositories-workspaces/workspaces
 load_from:
   - python_package: ASSET_DEMO
+  - python_package: modern_data_stack_assets

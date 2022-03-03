@@ -195,3 +195,4 @@ cython_debug/
 daily_temperature_highs.parquet
 hottest_dates.parquet
 warehouse_location
+modern_data_stack_assets/postgres-data
