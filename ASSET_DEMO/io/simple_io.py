@@ -56,23 +56,24 @@ class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
 
     def handle_output(self, context, obj):
         #partition = context.output_asset_partition_key()
-        partition_bounds = context.resources.partition_bounds
-        partition_str = partition_bounds["start"] + "_" + partition_bounds["end"]
-        partition_str = "".join(c for c in partition_str if c == "_" or c.isdigit())
+        #partition_bounds = context.resources.partition_bounds
+        #partition_str = partition_bounds["start"] + "_" + partition_bounds["end"]
+        #partition_str = "".join(c for c in partition_str if c == "_" or c.isdigit())
         #partition = context.config["partitions"]
         #get_dagster_logger().info(f"Partition in IO-M is: {partition}")
-        get_dagster_logger().info(f"Partition in IO-M is: {partition_bounds} resulting in: {partition_str}")
+        #get_dagster_logger().info(f"Partition in IO-M is: {partition_bounds} resulting in: {partition_str}")
         file_path = os.path.join(self.base_path, context.step_key, context.name)
         Path(os.path.join(self.base_path, context.step_key)).mkdir(parents=True, exist_ok=True)
         obj.to_csv(file_path, index=False)
 
         yield MetadataEntry.int(obj.shape[0], label="number of rows")
         yield MetadataEntry.float(0.1234, "some_column mean")
+        yield MetadataEntry.text(file_path, "output path")
 
     #def get_output_asset_key(self, context):
     #    file_path = os.path.join("my_base_dir", context.step_key, context.name)
     #    #return AssetKey(file_path)
     #    return file_path
 
-    def get_output_asset_partitions(self, context):
-        return set(context.config["partitions"])
+    #def get_output_asset_partitions(self, context):
+    #    return set(context.config["partitions"])
