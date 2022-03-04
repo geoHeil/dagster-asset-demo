@@ -28,6 +28,10 @@ dependencies:
   - requests
   - ratelimit 
   - pandera
+  - pyspark
+  - seaborn
+  - matplotlib
+  - scikit-learn
   - pip
   - pip:
       - dagster
@@ -37,6 +41,9 @@ dependencies:
       - dagster-postgres
       - dagster-airbyte
       - dagster-dbt
+      - dagster-pyspark
+      - dagster-slack
+      - dagstermill
       - dbt-core
       - dbt-sqlite
       - dbt-postgres

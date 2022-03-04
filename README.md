@@ -173,6 +173,8 @@ and create a dashboard directly from the metadata for quick observability
 - TODO steal the hacker news example
 
 
+
+
 #### Airbyte example
 
 > This example requires a running postgres and airbyte instance! Get one via docker: 

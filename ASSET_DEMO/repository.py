@@ -13,6 +13,8 @@ from ASSET_DEMO.jobs.sde_asset_combined import job_part_1, job_part_2
 from ASSET_DEMO.schedules.my_hourly_schedule import my_hourly_schedule
 from ASSET_DEMO.sensors.my_sensor import my_sensor
 from ASSET_DEMO.jobs.data_validation import stocks_job
+from ASSET_DEMO.jobs.pyspark_sample import pyspark_sample_job_local
+from ASSET_DEMO.notebooks.graph import iris_analysis
 
 
 @repository
@@ -28,7 +30,9 @@ def ASSET_DEMO():
     job_part_1, job_part_2,
     partitioned_asset_dummy_pipeline,
     partitioned_dummy_job,
-    stocks_job
+    stocks_job,
+    pyspark_sample_job_local,
+    iris_analysis
     
     ]
     schedules = [my_hourly_schedule]
