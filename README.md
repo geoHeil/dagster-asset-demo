@@ -156,6 +156,9 @@ The implicitly shown lineage:
 
 Various metrics are collected for each partition.
 
+And how markdown types can be automagically be generated from the schema materialization!
+![markdown types](img/markdown.png)
+
 ##### partitioned assets
 
 notice how the asset can track metadata for an materialization
@@ -219,12 +222,15 @@ CREATE DATABASE postgres_replica;
 
 #### papermill
 
-TODO
+https://docs.dagster.io/integrations/dagstermill
+
 
 #### pyspark
 
-- pyspark TODO set up a pyspark example with in-memory IO manager
+- pyspark
   - https://github.com/dagster-io/dagster/discussions/6899
+
+https://docs.dagster.io/integrations/spark
 
 
 #### hightouch export
@@ -233,7 +239,7 @@ https://hightouch.io/docs/
 
 https://blog.getdbt.com/dbt-and-hightouch-are-putting-transformed-data-to-work/
 
-TODO
+> reference is good enough
 
 #### further next steps
 

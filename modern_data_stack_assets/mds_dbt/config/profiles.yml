@@ -5,8 +5,8 @@ mds_dbt:
       type: postgres
       host: localhost
       port: 5432
-      user: postgres
-      pass: password
+      user: docker
+      pass: docker
       dbname: postgres_replica
       schema: public
       threads: 2
@@ -15,8 +15,8 @@ mds_dbt:
       type: postgres
       host: localhost
       port: 5432
-      user: postgres
-      pass: password
+      user: docker
+      pass: docker
       dbname: postgres
       schema: public
       threads: 2

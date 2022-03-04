@@ -1,8 +1,10 @@
 import os
 
 import pandas as pd
+import textwrap
 from dagster import get_dagster_logger, AssetKey, IOManager
 from pandas import DataFrame
+from pandas import DataFrame as PandasDataFrame
 from pathlib import Path
 
 class LocalFileSystemCSVIOManager(IOManager):
@@ -54,12 +56,21 @@ class PandasCsvIOManagerWithOutputAssetPartitions(IOManager):
         file_path = os.path.join(self.base_path, context.step_key, context.asset_partition_key, context.name)
         return pd.read_csv(file_path)
 
+    def pandas_columns_to_markdown(self, dataframe: PandasDataFrame) -> str:
+        return textwrap.dedent(
+             """
+         | Name | Type |
+         | ---- | ---- |
+        """) + "\n".join([f"| {name} | {dtype} |" for name, dtype in dataframe.dtypes.iteritems()])
+
     def handle_output(self, context, obj):
         file_path = os.path.join(self.base_path, context.step_key, context.asset_partition_key, context.name)
         get_dagster_logger().info(f"Suggested Path: {file_path}")
         Path(os.path.join(self.base_path, context.step_key, context.asset_partition_key)).mkdir(parents=True, exist_ok=True)
+        docstring_schema = self.pandas_columns_to_markdown(obj)
         obj.to_csv(file_path, index=False)
 
         yield MetadataEntry.int(obj.shape[0], label="number of rows")
         yield MetadataEntry.float(0.1234, "some_column mean")
         yield MetadataEntry.text(file_path, "output path")
+        yield MetadataEntry.md(docstring_schema, "DataFrame columns")

@@ -10,8 +10,10 @@ from dagster import check
 from dagster_postgres.utils import get_conn_string
 from dagster_airbyte import AirbyteResource
 
-from .constants import PG_SOURCE_CONFIG, PG_DESTINATION_CONFIG
-
+import constants
+PG_SOURCE_CONFIG = constants.PG_SOURCE_CONFIG
+PG_DESTINATION_CONFIG = constants.PG_DESTINATION_CONFIG
+ 
 
 # configures the number of records for each table
 N_USERS = 100
@@ -91,6 +93,7 @@ def setup_airbyte():
             "sourceId": source_id,
             "destinationId": destination_id,
             "syncCatalog": source_catalog,
+            "prefix": "",
             "status": "active",
         },
     )["connectionId"]

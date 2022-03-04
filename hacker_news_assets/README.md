@@ -20,7 +20,7 @@ This repo contains three jobs:
 
 - `hacker_news_api_download`
   - This job downloads events from the Hacker News API, splits them by type, and stores comments
-    and stories into their own seperate tables in our Snowflake database.
+    and stories into their own seperate tables in our database.
 - `story_recommender`
   - This job reads from the tables that `hacker_news_api_download` writes to, and uses this data
     to train a machine learning model to recommend stories to specific users based on their comment history.
