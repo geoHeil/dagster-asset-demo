@@ -108,7 +108,6 @@ Further reading material:
 
 - https://dagster.io/blog/rebundling-the-data-platform
 - https://docs.dagster.io/guides/dagster/software-defined-assets (as of 0.14.1 the API is stable now)
-- TODO link future Dagster blog post here (they promised a good one for Thursday)
 
 ##### minimal example (A)
 
@@ -166,7 +165,6 @@ and create a dashboard directly from the metadata for quick observability
 
 ![dashbaord from the collected metadata of the various runs](img/da_stats.png)
 
-TODO: fix IO manager
 
 ##### example with resources (D)
 
