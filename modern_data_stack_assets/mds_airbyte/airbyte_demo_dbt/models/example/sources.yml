@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: slack_sync
+    database: postgres
+    schema: public
+    tables:
+      - name: slack_channel_messages
+        identifier: _airbyte_raw_slack_channel_messages
+
+  - name: github_sync
+    database: postgres
+    schema: public
+    tables:
+      - name: github_commits

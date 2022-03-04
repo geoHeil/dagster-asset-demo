@@ -186,15 +186,54 @@ TODO: fix IO manager
 - Postgres is avaiable on: localhost:5432
 - Airbyte is available on: [http://localhost:8000](http://localhost:8000)
 
-> TODO set up Airbyte Connection!!! perhaps following https://dagster.io/blog/software-defined-assets?
-
-detailed instructions: https://dagster.io/blog/software-defined-assets
+detailed instructions: https://dagster.io/blog/software-defined-assets and in https://airbyte.com/recipes/orchestrate-data-ingestion-and-transformation-pipelines
 
 > NOTICE: We are using a different workspace here https://docs.dagster.io/concepts/repositories-workspaces/workspaces to showcase how different teams perhaps would want to collaborate (and separate their own data assets).
 
+you need to set up AirByte (https://airbyte.com/recipes/orchestrate-data-ingestion-and-transformation-pipelines) as outlined there:
+![img/mds_airbyte_pg_setup.png](img/mds_airbyte_pg_setup.png)
+
+or simply run:
+
+```python
+conda activate
+python -m modern_data_stack_assets.setup_airbyte
+
+#Created users table.
+#Created orders table.
+#Created Airbyte Source: ...
+#Created Airbyte Destination: ...
+#Created Airbyte Connection: <<TOKEN>>
+```
+You need to register the token in the [constants](modern_data_stack_assets.constants.py) file.
+
 graph integrating [airbyte](https://airbyte.com/), [dbt](https://docs.getdbt.com/tutorial/setting-up) and python code
 
+CREATE DATABASE postgres_replica;
+
+> TODO Airbyte Connection is failing!
+
+
 ![graph integrating airbyte, dbt and python code](img/mds_graph.png)
+
+
+#### papermill
+
+TODO
+
+#### pyspark
+
+- pyspark TODO set up a pyspark example with in-memory IO manager
+  - https://github.com/dagster-io/dagster/discussions/6899
+
+
+#### hightouch export
+
+https://hightouch.io/docs/
+
+https://blog.getdbt.com/dbt-and-hightouch-are-putting-transformed-data-to-work/
+
+TODO
 
 #### further next steps
 
@@ -206,8 +245,6 @@ In particular:
 - scheduling
 - partitions & backfills
 - easy testing of workflows by separating the business logic (semantics) from the underlying platform and resources
-- pyspark
-  - https://github.com/dagster-io/dagster/discussions/6899
 
 The official dagster documentation contains some good examples. 
 In particular https://docs.dagster.io/guides/dagster/example_project is a great recommentation to learn more.

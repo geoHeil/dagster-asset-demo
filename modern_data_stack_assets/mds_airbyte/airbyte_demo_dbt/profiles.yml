@@ -1,0 +1,12 @@
+airbyte_demo_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 1
+      host: localhost
+      port: 5432
+      user: postgres
+      pass: password123
+      dbname: postgres
+      schema: airbyte_demo_dbt
