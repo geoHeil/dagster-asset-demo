@@ -32,6 +32,7 @@ dependencies:
   - seaborn
   - matplotlib
   - scikit-learn
+  - python-duckdb
   - pip
   - pip:
       - dagster
@@ -47,6 +48,7 @@ dependencies:
       - dbt-core
       - dbt-sqlite
       - dbt-postgres
+      - dbt-duckdb
       - dagit
       # - acryl-datahub
       # - polars

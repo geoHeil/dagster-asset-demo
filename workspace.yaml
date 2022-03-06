@@ -3,4 +3,4 @@
 load_from:
   - python_package: ASSET_DEMO
   - python_package: modern_data_stack_assets
-#  - python_package: hacker_news_assets
+  - python_package: hacker_news_assets
