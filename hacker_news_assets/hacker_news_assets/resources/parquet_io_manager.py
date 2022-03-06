@@ -57,10 +57,8 @@ class PartitionedParquetIOManager(IOManager):
         partition_str = start.strftime(dt_format) + "_" + end.strftime(dt_format)
 
         key = context.asset_key.path[-1]
-        # if local fs path, store all outptus in same directory
         if "://" not in self._base_path:
-            return os.path.join(self._base_path, f"{key}-{partition_str}.pq")
-        # otherwise seperate into different dirs
+            os.makedirs(os.path.join(self._base_path, key), exist_ok=True)
         return os.path.join(self._base_path, key, f"{partition_str}.pq")
 
 

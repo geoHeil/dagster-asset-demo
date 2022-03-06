@@ -1,5 +1,5 @@
 import numpy as np
-from hacker_news_assets.assets.user_story_matrix import IndexedCooMatrix
+from hacker_news_assets.hacker_news_assets.assets.user_story_matrix import IndexedCooMatrix
 from pandas import DataFrame
 from scipy.sparse import coo_matrix, csc_matrix, csr_matrix
 from sklearn.decomposition import TruncatedSVD

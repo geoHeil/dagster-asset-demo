@@ -1,7 +1,7 @@
 # pylint: disable=redefined-outer-name
 import random
 
-from hacker_news_assets.assets.user_story_matrix import IndexedCooMatrix
+from hacker_news_assets.hacker_news_assets.assets.user_story_matrix import IndexedCooMatrix
 from pandas import DataFrame, Series
 from sklearn.decomposition import TruncatedSVD
 

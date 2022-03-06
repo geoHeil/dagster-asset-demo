@@ -1,7 +1,11 @@
 hacker_news_dbt:
   target: dev
   outputs:
-    dev:
+    local:
+      type: duckdb
+      path: hn_duckdb.duckdb
+
+    staging:
       type: snowflake
       account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
 
