@@ -214,9 +214,6 @@ graph integrating [airbyte](https://airbyte.com/), [dbt](https://docs.getdbt.com
 
 CREATE DATABASE postgres_replica;
 
-> TODO Airbyte Connection is failing!
-
-
 ![graph integrating airbyte, dbt and python code](img/mds_graph.png)
 
 
