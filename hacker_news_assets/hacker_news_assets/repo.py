@@ -16,18 +16,18 @@ from .sensors.hn_tables_updated_sensor import make_hn_tables_updated_sensor
 from .sensors.slack_on_failure_sensor import make_slack_on_failure_sensor
 
 
-#@repository
-#def hacker_news_assets_local():
-#    # TODO add missing
-#    return [local_assets, download_local_job, activity_stats_local_job, story_recommender_local_job]
-
 @repository
 def hacker_news_assets_local():
-    return [
-        local_assets, 
-        schedule_from_partitions(download_local_job),
-        #make_slack_on_failure_sensor(base_url="my_dagit_url.com"),
-        make_hn_tables_updated_sensor(activity_stats_local_job),
-        make_hn_tables_updated_sensor(story_recommender_local_job),
-    
-    ]
+    # TODO add missing
+    return [local_assets, download_local_job, activity_stats_local_job, story_recommender_local_job]
+
+#@repository
+#def hacker_news_assets_local():
+#    return [
+#        local_assets, 
+#        schedule_from_partitions(download_local_job),
+#        #make_slack_on_failure_sensor(base_url="my_dagit_url.com"),
+#        make_hn_tables_updated_sensor(activity_stats_local_job),
+#        make_hn_tables_updated_sensor(story_recommender_local_job),
+#    
+#    ]

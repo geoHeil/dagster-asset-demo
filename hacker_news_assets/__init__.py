@@ -1,1 +1,1 @@
-from .hacker_news_assets.repo import hacker_news_assets_staging, hacker_news_assets_prod
+from .hacker_news_assets.repo import hacker_news_assets_local
