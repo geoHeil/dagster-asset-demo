@@ -3,30 +3,32 @@ hacker_news_dbt:
   outputs:
     local:
       type: duckdb
-      path: hn_duckdb.duckdb
-
-    staging:
-      type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-
-      # User/password auth
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
-
-      database: DEMO_DB
-      warehouse: TINY_WAREHOUSE
-      schema: hackernews_dev
-      client_session_keep_alive: False
-
-    prod:
-      type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-
-      # User/password auth
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
-
-      database: DEMO_DB
-      warehouse: TINY_WAREHOUSE
+      path: "{{ var('duckdb_path') }}"
+      #path: "{{ env_var('DUCKDB_PATH') }}"
       schema: hackernews
-      client_session_keep_alive: False
+
+    # staging:
+    #   type: snowflake
+    #   account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+
+    #   # User/password auth
+    #   user: "{{ env_var('SNOWFLAKE_USER') }}"
+    #   password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+
+    #   database: DEMO_DB
+    #   warehouse: TINY_WAREHOUSE
+    #   schema: hackernews_dev
+    #   client_session_keep_alive: False
+
+    # prod:
+    #   type: snowflake
+    #   account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+
+    #   # User/password auth
+    #   user: "{{ env_var('SNOWFLAKE_USER') }}"
+    #   password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+
+    #   database: DEMO_DB
+    #   warehouse: TINY_WAREHOUSE
+    #   schema: hackernews
+    #   client_session_keep_alive: False

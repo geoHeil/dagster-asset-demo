@@ -16,10 +16,11 @@ from .parquet_io_manager import (
 )
 #from .snowflake_io_manager import snowflake_io_manager
 
+duck_db_path = file_relative_path(__file__, "duckdb.local.duckdb")
 DBT_PROJECT_DIR = file_relative_path(__file__, "../../hacker_news_dbt")
 DBT_PROFILES_DIR = DBT_PROJECT_DIR + "/config"
 dbt_local_resource = dbt_cli_resource.configured(
-    {"profiles_dir": DBT_PROFILES_DIR, "project_dir": DBT_PROJECT_DIR, "target": "local"}
+    {"profiles_dir": DBT_PROFILES_DIR, "project_dir": DBT_PROJECT_DIR, "target": "local", "vars": {"duckdb_path": duck_db_path}}
 )
 #dbt_staging_resource = dbt_cli_resource.configured(
 #    {"profiles-dir": DBT_PROFILES_DIR, "project-dir": DBT_PROJECT_DIR, "target": "staging"}
@@ -79,11 +80,10 @@ configured_pyspark = pyspark_resource.configured(
 #     "dbt": dbt_staging_resource,
 # }
 
-
 RESOURCES_LOCAL = {
     "parquet_io_manager": local_partitioned_parquet_io_manager,
     "warehouse_io_manager": duckdb_partitioned_parquet_io_manager.configured(
-        {"duckdb_path": "hn_duckdb.duckdb"}
+        {"duckdb_path": duck_db_path}
     ),
     "pyspark": configured_pyspark,
     #": snowflake_io_manager_prod,

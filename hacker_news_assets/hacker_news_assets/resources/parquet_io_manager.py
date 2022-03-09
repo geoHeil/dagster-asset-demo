@@ -39,7 +39,6 @@ class PartitionedParquetIOManager(IOManager):
         yield MetadataEntry.path(path=path, label="path")
 
     def load_input(self, context) -> Union[pyspark.sql.DataFrame, str]:
-        # In this load_input function, we vary the behavior based on the type of the downstream input
         path = self._get_path(context.upstream_output)
         if context.dagster_type.typing_type == pyspark.sql.DataFrame:
             # return pyspark dataframe
@@ -51,15 +50,18 @@ class PartitionedParquetIOManager(IOManager):
         )
 
     def _get_path(self, context: OutputContext):
-        # filesystem-friendly string that is scoped to the start/end times of the data slice
-        start, end = context.asset_partitions_time_window
-        dt_format = "%Y%m%d%H%M%S"
-        partition_str = start.strftime(dt_format) + "_" + end.strftime(dt_format)
-
         key = context.asset_key.path[-1]
+
+        if context.has_asset_partitions:
+            start, end = context.asset_partitions_time_window
+            dt_format = "%Y%m%d%H%M%S"
+            partition_str = start.strftime(dt_format) + "_" + end.strftime(dt_format)
+            return os.path.join(self._base_path, key, f"{partition_str}.pq")
+        else:
+            return os.path.join(self._base_path, key, f"{partition_str}.pq")
+
         if "://" not in self._base_path:
             os.makedirs(os.path.join(self._base_path, key), exist_ok=True)
-        return os.path.join(self._base_path, key, f"{partition_str}.pq")
 
 
 @io_manager(
