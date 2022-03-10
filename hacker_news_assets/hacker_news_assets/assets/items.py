@@ -79,4 +79,4 @@ def comments(items: SparkDF) -> SparkDF:
     metadata={"schema": HN_ITEMS_TABLE_SCHEMA},
 )
 def stories(items: SparkDF) -> SparkDF:
-    return items.where(items["type"] == "stories")
+    return items.where(items["type"] == "story")

@@ -80,7 +80,7 @@ def top_components_to_markdown(component_top_stories: DataFrame) -> str:
         component_markdowns.append(
             "\n".join(
                 [f"Component {i}"]
-                + ["- " + row["title"] for _, row in component_i_top_5_stories.iterrows()]
+                + ["- " + str(row["title"]) for _, row in component_i_top_5_stories.iterrows()]
             )
         )
 
