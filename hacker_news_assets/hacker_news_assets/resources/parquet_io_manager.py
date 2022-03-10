@@ -25,10 +25,13 @@ class PartitionedParquetIOManager(IOManager):
     def handle_output(
         self, context: OutputContext, obj: Union[pandas.DataFrame, pyspark.sql.DataFrame]
     ):
-
         path = self._get_path(context)
+        if "://" not in self._base_path:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+
         if isinstance(obj, pandas.DataFrame):
             row_count = len(obj)
+            context.log.info(f"Row count: {row_count}")
             obj.to_parquet(path=path, index=False)
         elif isinstance(obj, pyspark.sql.DataFrame):
             row_count = obj.count()
@@ -58,10 +61,7 @@ class PartitionedParquetIOManager(IOManager):
             partition_str = start.strftime(dt_format) + "_" + end.strftime(dt_format)
             return os.path.join(self._base_path, key, f"{partition_str}.pq")
         else:
-            return os.path.join(self._base_path, key, f"{partition_str}.pq")
-
-        if "://" not in self._base_path:
-            os.makedirs(os.path.join(self._base_path, key), exist_ok=True)
+            return os.path.join(self._base_path, f"{key}.pq")
 
 
 @io_manager(

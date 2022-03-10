@@ -3,9 +3,13 @@ hacker_news_dbt:
   outputs:
     local:
       type: duckdb
-      path: "{{ var('duckdb_path') }}"
-      #path: "{{ env_var('DUCKDB_PATH') }}"
+      path: hackernews.duckdb
       schema: hackernews
+    #local:
+    #  type: duckdb
+    #  path: "{{ var('duckdb_path') }}"
+      #path: "{{ env_var('DUCKDB_PATH') }}"
+    #  schema: hackernews
 
     # staging:
     #   type: snowflake

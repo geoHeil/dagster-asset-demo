@@ -9,18 +9,19 @@ from dagster.utils import file_relative_path
 
 #from .common_bucket_s3_pickle_io_manager import common_bucket_s3_pickle_io_manager
 from .duckdb_parquet_io_manager import duckdb_partitioned_parquet_io_manager
-from .hn_resource import hn_api_subsample_client
+from .hn_resource import hn_api_subsample_client, hn_api_client
 from .parquet_io_manager import (
     local_partitioned_parquet_io_manager,
  #   s3_partitioned_parquet_io_manager,
 )
 #from .snowflake_io_manager import snowflake_io_manager
 
-duck_db_path = file_relative_path(__file__, "duckdb.local.duckdb")
+#duck_db_path = file_relative_path(__file__, "duckdb.local.duckdb")
 DBT_PROJECT_DIR = file_relative_path(__file__, "../../hacker_news_dbt")
 DBT_PROFILES_DIR = DBT_PROJECT_DIR + "/config"
 dbt_local_resource = dbt_cli_resource.configured(
-    {"profiles_dir": DBT_PROFILES_DIR, "project_dir": DBT_PROJECT_DIR, "target": "local", "vars": {"duckdb_path": duck_db_path}}
+    # "vars": {"duckdb_path": duck_db_path}
+    {"profiles_dir": DBT_PROFILES_DIR, "project_dir": DBT_PROJECT_DIR, "target": "local"}
 )
 #dbt_staging_resource = dbt_cli_resource.configured(
 #    {"profiles-dir": DBT_PROFILES_DIR, "project-dir": DBT_PROJECT_DIR, "target": "staging"}
@@ -82,11 +83,15 @@ configured_pyspark = pyspark_resource.configured(
 
 RESOURCES_LOCAL = {
     "parquet_io_manager": local_partitioned_parquet_io_manager,
-    "warehouse_io_manager": duckdb_partitioned_parquet_io_manager.configured(
-        {"duckdb_path": duck_db_path}
+    #"warehouse_io_manager": duckdb_partitioned_parquet_io_manager.configured(
+    #    {"duckdb_path": duck_db_path}
+    #),
+        "warehouse_io_manager": duckdb_partitioned_parquet_io_manager.configured(
+        {"duckdb_path": os.path.join(DBT_PROJECT_DIR, "hackernews.duckdb")},
     ),
     "pyspark": configured_pyspark,
     #": snowflake_io_manager_prod,
-    "hn_client": hn_api_subsample_client.configured({"sample_rate": 10}),
+    #"hn_client": hn_api_subsample_client.configured({"sample_rate": 10}),
+    "hn_client": hn_api_client,
     "dbt": dbt_local_resource,
 }

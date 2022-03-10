@@ -39,7 +39,7 @@ def user_story_matrix(comment_stories: DataFrame):
     sparse_cols = story_col_indices[deduplicated["story_id"]]
     sparse_data = np.ones(len(sparse_rows))
 
-    return return Output(
+    return Output(
         IndexedCooMatrix(
             matrix=coo_matrix(
                 (sparse_data, (sparse_rows, sparse_cols)), shape=(len(users), len(stories))

@@ -18,11 +18,14 @@ class DuckDBPartitionedParquetIOManager(PartitionedParquetIOManager):
             con = self._connect_duckdb(context)
 
             path = self._get_path(context)
-            folder = os.path.dirname(path)
+            if context.has_asset_partitions:
+                to_scan = os.path.join(os.path.dirname(path), "*.pq", "*.parquet")
+            else:
+                to_scan = path
             con.execute("create schema if not exists hackernews;")
             con.execute(
                 f"create or replace view {self._table_path(context)} as "
-                f"select * from parquet_scan('{folder}/*.pq/*.parquet');"
+                f"select * from parquet_scan('{to_scan}');"
             )
 
     def load_input(self, context):
