@@ -26,7 +26,7 @@ def make_hn_tables_updated_sensor(job: JobDefinition) -> SensorDefinition:
         comments_event_records = context.instance.get_event_records(
             EventRecordsFilter(
                 event_type=DagsterEventType.ASSET_MATERIALIZATION,
-                asset_key=AssetKey(["snowflake", "hackernews", "comments"]),
+                asset_key=AssetKey(["hackernews", "comments"]),
                 after_cursor=comments_cursor,
             ),
             ascending=False,
@@ -35,7 +35,7 @@ def make_hn_tables_updated_sensor(job: JobDefinition) -> SensorDefinition:
         stories_event_records = context.instance.get_event_records(
             EventRecordsFilter(
                 event_type=DagsterEventType.ASSET_MATERIALIZATION,
-                asset_key=AssetKey(["snowflake", "hackernews", "stories"]),
+                asset_key=AssetKey(["hackernews", "stories"]),
                 after_cursor=stories_cursor,
             ),
             ascending=False,

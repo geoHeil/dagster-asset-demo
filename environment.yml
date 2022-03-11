@@ -33,6 +33,7 @@ dependencies:
   - matplotlib
   - scikit-learn
   - python-duckdb
+  - pytest
   - pip
   - pip:
       - dagster
