@@ -15,7 +15,7 @@ from ASSET_DEMO.sensors.my_sensor import my_sensor
 from ASSET_DEMO.jobs.data_validation import stocks_job
 from ASSET_DEMO.jobs.pyspark_sample import pyspark_sample_job_local
 from ASSET_DEMO.notebooks.graph import iris_analysis
-
+from .sensors.example_sensor import log_file_job, my_directory_sensor
 
 @repository
 def ASSET_DEMO():
@@ -32,10 +32,11 @@ def ASSET_DEMO():
     partitioned_dummy_job,
     stocks_job,
     pyspark_sample_job_local,
-    iris_analysis
+    iris_analysis,
+    log_file_job
     
     ]
     schedules = [my_hourly_schedule]
-    sensors = [my_sensor]
+    sensors = [my_sensor, my_directory_sensor]
 
     return jobs + schedules + sensors
