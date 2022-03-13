@@ -15,7 +15,7 @@ from ASSET_DEMO.sensors.my_sensor import my_sensor
 from ASSET_DEMO.jobs.data_validation import stocks_job
 from ASSET_DEMO.jobs.pyspark_sample import pyspark_sample_job_local
 from ASSET_DEMO.notebooks.graph import iris_analysis
-from .sensors.example_sensor import log_file_job, my_directory_sensor
+from .sensors.example_sensor import log_file_job, my_directory_sensor, log_file_job_remote, my_directory_sensor_with_skip_reasons_and_SFTP
 
 @repository
 def ASSET_DEMO():
@@ -33,10 +33,10 @@ def ASSET_DEMO():
     stocks_job,
     pyspark_sample_job_local,
     iris_analysis,
-    log_file_job
+    log_file_job, log_file_job_remote
     
     ]
     schedules = [my_hourly_schedule]
-    sensors = [my_sensor, my_directory_sensor]
+    sensors = [my_sensor, my_directory_sensor, my_directory_sensor_with_skip_reasons_and_SFTP]
 
     return jobs + schedules + sensors

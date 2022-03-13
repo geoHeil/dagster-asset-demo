@@ -33,6 +33,7 @@ dependencies:
   - matplotlib
   - scikit-learn
   - python-duckdb
+  - paramiko
   - pytest
   - pip
   - pip:

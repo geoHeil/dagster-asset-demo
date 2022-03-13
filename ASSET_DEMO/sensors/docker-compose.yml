@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  sftp:
+    image: atmoz/sftp
+    volumes:
+        - ./sft_sample/upload:/home/foo/upload
+    ports:
+        - "2222:22"
+    command: foo:bar:1001
