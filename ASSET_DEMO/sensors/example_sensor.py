@@ -1,6 +1,7 @@
 # based on: https://docs.dagster.io/concepts/partitions-schedules-sensors/sensors
 
 from dagster import op, job, DefaultSensorStatus, SkipReason
+from matplotlib.style import context
 
 
 @op(config_schema={"filename": str})
@@ -45,6 +46,45 @@ def my_directory_sensor():
 # Example remote SFTP sensor
 # spin up the docker-compose file
 # based on: https://gist.github.com/lkluft/ddda28208f7658d93f8238ad88bd45f2
+# def paramiko_glob(path, pattern, sftp):
+#     """Search recursively for files matching a given pattern.
+    
+#     Parameters:
+#         path (str): Path to directory on remote machine.
+#         pattern (str): Python re [0] pattern for filenames.
+#         sftp (SFTPClient): paramiko SFTPClient.
+        
+#     [0] https://docs.python.org/2/library/re.html
+        
+#     """
+#     p = re.compile(pattern)
+#     root = sftp.listdir(path)
+#     file_list = []
+    
+#     # Loop over all entries in given path...
+#     for f in (os.path.join(path, entry) for entry in root):
+#         f_stat = sftp.stat(f)
+#         # ... if it is a directory call paramiko_glob recursively.
+#         if stat.S_ISDIR(f_stat.st_mode):
+#             #file_list += paramiko_glob(f, pattern, sftp)
+#             yield from paramiko_glob(f, pattern, sftp)
+#             #context.log.info(f"####  and {file_list}###")
+#             #print(f"#### and {file_list}###")
+#         # ... if it is a file, check the name pattern and append it to file_list.
+#         elif p.match(f):
+#             file_list.append(f)
+#             #has_files = True
+#             context.log.info(f"#### {f}  and {file_list}###")
+#             print(f"#### {f}  and {file_list}###")
+#             yield RunRequest(
+#                 run_key=f,
+#                 run_config={
+#                     "ops": {"process_file": {"config": {"filename": f}}}
+#                 },
+#             )
+#     #if not has_files:
+#     #    yield SkipReason(f"No files found in {path}.")
+
 def paramiko_glob(path, pattern, sftp):
     """Search recursively for files matching a given pattern.
     
@@ -65,18 +105,17 @@ def paramiko_glob(path, pattern, sftp):
         f_stat = sftp.stat(f)
         # ... if it is a directory call paramiko_glob recursively.
         if stat.S_ISDIR(f_stat.st_mode):
-            paramiko_glob(f, pattern, sftp)
+            file_list += paramiko_glob(f, pattern, sftp)
         # ... if it is a file, check the name pattern and append it to file_list.
         elif p.match(f):
-            yield RunRequest(
-                run_key=f,
-                run_config={
-                    "ops": {"process_file": {"config": {"filename": f}}}
-                },
-            )
-            has_files = True
-    if not has_files:
-        yield SkipReason(f"No files found in {path}.")
+            #file_list.append(f)
+            file_list.append(RunRequest(
+                 run_key=f,
+                 run_config={
+                     "ops": {"process_file": {"config": {"filename": f}}}
+                 },
+             ))
+    return file_list
 
 @job
 def log_file_job_remote():
@@ -90,7 +129,7 @@ def my_directory_sensor_with_skip_reasons_and_SFTP():
     sftp = ssh.open_sftp()
 
     # Actucal call of paramiko_glob.
-    files = paramiko_glob('upload/', '', sftp)
+    yield from paramiko_glob('upload/', '', sftp)
 
     sftp.close()
     ssh.close()
