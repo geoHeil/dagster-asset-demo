@@ -9,7 +9,6 @@ import pandas as pd
 import random
 from dagster import job
 
-from dagster.core.asset_defs import build_assets_job
 from ASSET_DEMO.ops.mini_asset import daily_temperature_highs, sfo_q2_weather_sample, hottest_dates, lowest_dates
 from ASSET_DEMO.io.simple_io import LocalFileSystemCSVIOManager, LocalFileSystemParquetIOManager, PandasCsvIOManagerWithOutputAssetPartitions
 from dagster import IOManagerDefinition
@@ -34,8 +33,8 @@ def dummy_asset_partitioned(context) -> DataFrame:
         "random_dummy_metric": rand_metric_dummy_value
     })
 
-partitioned_asset_dummy_pipeline = build_assets_job(
-    "partitioned_asset_dummy",
+partitioned_asset_dummy_ag = AssetGroup(
+    #"partitioned_asset_dummy",
     assets=[dummy_asset_partitioned],
     source_assets=[],
     resource_defs={
@@ -43,3 +42,4 @@ partitioned_asset_dummy_pipeline = build_assets_job(
         "partition_bounds": ResourceDefinition.none_resource()
     },
 )
+partitioned_asset_dummy_pipeline = partitioned_asset_dummy_ag.build_job("partitioned_asset_dummy")

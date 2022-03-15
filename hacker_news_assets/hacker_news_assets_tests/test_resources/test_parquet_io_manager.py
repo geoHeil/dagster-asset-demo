@@ -8,7 +8,7 @@ from hacker_news_assets.hacker_news_assets.partitions import hourly_partitions
 from hacker_news_assets.hacker_news_assets.resources.parquet_io_manager import local_partitioned_parquet_io_manager
 from pyspark.sql import DataFrame as SparkDF
 
-from dagster import asset, build_assets_job
+from dagster import asset, AssetGroup
 
 
 def test_io_manager():
@@ -26,8 +26,8 @@ def test_io_manager():
         return pandas_df_asset
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        io_manager_test_job = build_assets_job(
-            "io_manager_test_job",
+        io_manager_test_ag = AssetGroup(
+            #"io_manager_test_job",
             assets=[pandas_df_asset, spark_input_asset],
             resource_defs={
                 "pyspark": pyspark_resource,
@@ -36,6 +36,7 @@ def test_io_manager():
                 ),
             },
         )
+        io_manager_test_job = io_manager_test_ag.build_job("io_manager_test_job")
 
         expected_path = os.path.join(temp_dir, "pandas_df_asset-20220101160000_20220101170000.pq")
         res = io_manager_test_job.execute_in_process(partition_key="2022-01-01-16:00")

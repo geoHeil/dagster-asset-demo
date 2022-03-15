@@ -9,11 +9,9 @@ import pandas as pd
 import random
 from dagster import job
 
-from dagster.core.asset_defs import build_assets_job
 from ASSET_DEMO.ops.mini_asset import daily_temperature_highs, sfo_q2_weather_sample, hottest_dates, lowest_dates
 from ASSET_DEMO.io.simple_io import LocalFileSystemCSVIOManager, LocalFileSystemParquetIOManager
 from dagster import IOManagerDefinition
-from dagster import AssetGroup
 
 @op(config_schema={"date": str})
 def hello_here(context):
