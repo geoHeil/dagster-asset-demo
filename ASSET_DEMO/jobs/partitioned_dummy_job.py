@@ -1,7 +1,7 @@
 from dagster import job
 
-from dagster import op, get_dagster_logger, Out
-from dagster import build_schedule_from_partitioned_job, job, daily_partitioned_config
+from dagster import op, Out
+from dagster import job, daily_partitioned_config
 from dagster import AssetKey, AssetMaterialization, EventMetadata, Output
 from dagster import SourceAsset, asset
 from pandas import DataFrame
@@ -9,7 +9,6 @@ import pandas as pd
 import random
 from dagster import job
 
-from ASSET_DEMO.ops.mini_asset import daily_temperature_highs, sfo_q2_weather_sample, hottest_dates, lowest_dates
 from ASSET_DEMO.io.simple_io import LocalFileSystemCSVIOManager, LocalFileSystemParquetIOManager
 from dagster import IOManagerDefinition
 
@@ -20,9 +19,6 @@ def hello_here(context):
     """
     date = context.op_config["date"]
     context.log.info(f"processing data for {date}")
-    #name = context.op_config["name"]
-    #get_dagster_logger().info(f"Hello from logger: {name}!")
-
 
 from dagster import daily_partitioned_config, DailyPartitionsDefinition
 from datetime import datetime
@@ -40,7 +36,3 @@ def partitioned_dummy_job():
     https://docs.dagster.io/concepts/partitions-schedules-sensors/schedules
     """
     hello_here()
-
-#do_stuff_partitioned_schedule = build_schedule_from_partitioned_job(
-#    partitioned_dummy_asset,
-#)

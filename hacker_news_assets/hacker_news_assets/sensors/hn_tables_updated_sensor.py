@@ -7,7 +7,7 @@ from dagster import (
     JobDefinition,
     RunRequest,
     SensorDefinition,
-    sensor,
+    sensor, DefaultSensorStatus
 )
 
 
@@ -17,7 +17,7 @@ def make_hn_tables_updated_sensor(job: JobDefinition) -> SensorDefinition:
     both been updated.
     """
 
-    @sensor(name=f"{job.name}_on_hn_tables_updated", job=job)
+    @sensor(name=f"{job.name}_on_hn_tables_updated", job=job, default_status=DefaultSensorStatus.RUNNING)
     def hn_tables_updated_sensor(context):
         cursor_dict = json.loads(context.cursor) if context.cursor else {}
         comments_cursor = cursor_dict.get("comments")
