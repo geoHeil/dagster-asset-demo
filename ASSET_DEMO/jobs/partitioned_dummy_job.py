@@ -18,6 +18,7 @@ def hello_here(context):
     dummy asset with partitions
     """
     date = context.op_config["date"]
+    #date = context.partition_key
     context.log.info(f"processing data for {date}")
 
 from dagster import daily_partitioned_config, DailyPartitionsDefinition
