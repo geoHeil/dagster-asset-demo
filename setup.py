@@ -1,21 +1,22 @@
 import setuptools
 
+dagster_version = "0.14.6"
 setuptools.setup(
     name="ASSET_DEMO",
     packages=setuptools.find_packages(exclude=["ASSET_DEMO_tests"]),
     package_data={"modern_data_stack_assets": ["mds_dbt/*"]},
     install_requires=[
-        "dagster==0.14.5",
-        "dagster-shell==0.14.5",
-        "dagster-pandas==0.14.5",
-        "dagster-dbt==0.14.5",
-        "dagster-pandera==0.14.5",
-        "dagster-airbyte==0.14.5",
-        "dagster-postgres==0.14.5",
-        "dagster-pyspark==0.14.5",
-        "dagster-slack==0.14.5",
-        "dagstermill==0.14.5",
-        "dagit==0.14.5",
+        f"dagster=={dagster_version}",
+        f"dagster-shell=={dagster_version}",
+        f"dagster-pandas=={dagster_version}",
+        f"dagster-dbt=={dagster_version}",
+        f"dagster-pandera=={dagster_version}",
+        f"dagster-airbyte=={dagster_version}",
+        f"dagster-postgres=={dagster_version}",
+        f"dagster-pyspark=={dagster_version}",
+        f"dagster-slack=={dagster_version},
+        f"dagstermill=={dagster_version}",
+        f"dagit=={dagster_version}",
         "pytest",
     ],
 )
