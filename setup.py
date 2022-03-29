@@ -14,7 +14,7 @@ setuptools.setup(
         f"dagster-airbyte=={dagster_version}",
         f"dagster-postgres=={dagster_version}",
         f"dagster-pyspark=={dagster_version}",
-        f"dagster-slack=={dagster_version},
+        f"dagster-slack=={dagster_version}",
         f"dagstermill=={dagster_version}",
         f"dagit=={dagster_version}",
         "pytest",
