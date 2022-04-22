@@ -1,6 +1,6 @@
 import setuptools
 
-dagster_version = "0.14.8"
+dagster_version = "0.14.10"
 setuptools.setup(
     name="ASSET_DEMO",
     packages=setuptools.find_packages(exclude=["ASSET_DEMO_tests"]),

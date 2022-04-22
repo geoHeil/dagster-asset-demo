@@ -7,8 +7,10 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - jupyterlab
-  - jupyter_contrib_nbextensions
+  #- jupyterlab
+  #- nbformat>=5.2 
+  # https://stackoverflow.com/questions/38411942/anaconda-conda-install-a-specific-package-version
+  #- jupyter_contrib_nbextensions
   - nb_conda
   - ipywidgets
   - jupyterlab-git
@@ -52,5 +54,6 @@ dependencies:
       - dbt-postgres
       - dbt-duckdb
       - dagit
+      - jupyterlab
       # - acryl-datahub
       # - polars
